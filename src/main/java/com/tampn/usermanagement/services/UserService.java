@@ -2,7 +2,9 @@ package com.tampn.usermanagement.services;
 
 import com.github.javafaker.Faker;
 import com.tampn.usermanagement.entities.User;
+import com.tampn.usermanagement.payloads.responses.FindUserResponse;
 import com.tampn.usermanagement.repositories.UserRepository;
+import com.tampn.usermanagement.repositories.custom.CustomUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    CustomUserRepository customUserRepository;
 
     /**
      * Hàm này sẽ chạy sau khi spring boot khởi chạy
@@ -49,7 +54,16 @@ public class UserService {
         }
     }
 
-    public List<User> getAllUser() {
-        return userRepository.findAll();
+    /**
+     * @param search Search value in client
+     * @param page page query in client
+     * @param size max records/page
+     * @return {@link FindUserResponse}
+     */
+    public FindUserResponse getUser(String search, int page, int size) {
+        FindUserResponse response = new FindUserResponse();
+        response.setUsers(customUserRepository.getListUserBy(search, page, size));
+        response.setTotal(customUserRepository.getCountUserBy(search).intValue());
+        return response;
     }
 }
