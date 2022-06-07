@@ -19,31 +19,31 @@ public class CustomUserRepoImpl implements CustomUserRepository {
 
     public List<User> getListUserBy(String search, int page, int size) {
         // Query
-        StringBuilder query = new StringBuilder("SELECT u FROM users u");
+        StringBuilder query = new StringBuilder("SELECT * FROM users u");
         if (StringUtils.hasText(search)) {
-            query.append(" WHERE u.fullName LIKE %").append(search).append("%")
-                    .append(" OR u.lastName LIKE %").append(search).append("%")
-                    .append(" OR u.firstName LIKE %").append(search).append("%")
-                    .append(" OR u.address LIKE %").append(search).append("%")
-                    .append(" OR u.phoneNumber LIKE %").append(search).append("%");
+            query.append(" WHERE u.full_name LIKE '%").append(search).append("%'")
+                    .append(" OR u.last_name LIKE '%").append(search).append("%'")
+                    .append(" OR u.first_name LIKE '%").append(search).append("%'")
+                    .append(" OR u.address LIKE '%").append(search).append("%'")
+                    .append(" OR u.phone_number LIKE '%").append(search).append("%'");
         }
-        Query userTypedQuery = entityManager.createQuery(query.toString(), User.class);
+        Query userQuery = entityManager.createNativeQuery(query.toString(), User.class);
 
         // Paging
-        userTypedQuery.setFirstResult(1);
-        userTypedQuery.setMaxResults(25);
-        return userTypedQuery.getResultList();
+        userQuery.setFirstResult(size * page);
+        userQuery.setMaxResults(size);
+        return userQuery.getResultList();
     }
 
     @Override
     public BigInteger getCountUserBy(String search) {
         StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM users");
         if (StringUtils.hasText(search)) {
-            query.append(" WHERE users.fullName LIKE %").append(search).append("%")
-                    .append(" OR users.lastName LIKE %").append(search).append("%")
-                    .append(" OR users.firstName LIKE %").append(search).append("%")
-                    .append(" OR users.address LIKE %").append(search).append("%")
-                    .append(" OR users.phoneNumber LIKE %").append(search).append("%");
+            query.append(" WHERE users.full_name LIKE '%").append(search).append("%'")
+                    .append(" OR users.last_name LIKE '%").append(search).append("%'")
+                    .append(" OR users.first_name LIKE '%").append(search).append("%'")
+                    .append(" OR users.address LIKE '%").append(search).append("%'")
+                    .append(" OR users.phone_number LIKE '%").append(search).append("%'");
         }
         return (BigInteger) entityManager.createNativeQuery(query.toString()).getSingleResult();
     }

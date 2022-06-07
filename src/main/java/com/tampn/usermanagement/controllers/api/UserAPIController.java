@@ -19,10 +19,9 @@ public class UserAPIController {
 
     @GetMapping("/users")
     public ResponseEntity<FindUserResponse> getListUser(
-            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "25") Integer size,
             @RequestParam(required = false, defaultValue = "") String search) {
-        log.info("Get list user with search {} page {} and size {}", search, page, size);
         try {
             FindUserResponse response = userService.getUser(search, page, size);
             return ResponseEntity.ok(response);
