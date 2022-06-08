@@ -28,7 +28,7 @@ const MyAjax = function() {
 
     function doPut(url, data, doSuccess, doError) {
         $.ajax({
-            type: "POST",
+            type: "PUT",
             url: url,
             data: data,
             success: (response) => {
@@ -42,7 +42,7 @@ const MyAjax = function() {
 
     function doDelete(url, data, doSuccess, doError) {
         $.ajax({
-            type: "POST",
+            type: "DELETE",
             url: url,
             data: data,
             success: (response) => {

@@ -1,6 +1,7 @@
 package com.tampn.usermanagement.services;
 
 import com.github.javafaker.Faker;
+import com.github.javafaker.Name;
 import com.tampn.usermanagement.entities.User;
 import com.tampn.usermanagement.payloads.responses.FindUserResponse;
 import com.tampn.usermanagement.repositories.UserRepository;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,13 +39,14 @@ public class UserService {
         }
 
         // Insert 1000 user if user record = 0
+        Faker faker = new Faker();
         List<User> users = new ArrayList<>();
         for (int i = 0; i < 1000; i++) {
-            Faker faker = new Faker();
+            Name name = faker.name();
             User user = new User();
-            user.setFullName(faker.name().fullName());
-            user.setLastName(faker.name().lastName());
-            user.setFirstName(faker.name().firstName());
+            user.setFullName(name.fullName());
+            user.setLastName(name.lastName());
+            user.setFirstName(name.firstName());
             user.setAddress(faker.address().fullAddress());
             user.setPhoneNumber(faker.phoneNumber().phoneNumber());
             users.add(user);
@@ -65,5 +68,14 @@ public class UserService {
         response.setUsers(customUserRepository.getListUserBy(search, page, size));
         response.setTotal(customUserRepository.getCountUserBy(search).intValue());
         return response;
+    }
+
+    /**
+     * Delete user by User id
+     * @param userId userId
+     */
+    @Transactional
+    public void deleteUser(@NotNull Long userId) {
+        userRepository.deleteById(userId);
     }
 }

@@ -94,13 +94,14 @@
     const myPagination = $("#my-pagination");
     const limitRecord = $("#select-record");
     const search = $("#input-search");
+    let searchValue = "";
 
     $(document).ready(function () {
         initUIComponent(search.val(), 0, limitRecord.val(), true);
     });
 
     function initUIComponent(search, page, size, reDrawPage) {
-        MyAjax.get(`/api/users?search=${search}&page=${page}&size=${size}`, (response) => {
+        MyAjax.get(`/api/users?search=${encodeURIComponent(search)}&page=${page}&size=${size}`, (response) => {
             // render table
             renderTableUser(response?.users);
 
@@ -135,19 +136,20 @@
     }
 
     myPagination.click(() => {
-        initUIComponent(search.val(), myPagination.pagination('getCurrentPage') - 1, limitRecord.val(), false);
+        initUIComponent(searchValue, myPagination.pagination('getCurrentPage') - 1, limitRecord.val(), false);
     });
 
     limitRecord.change(() => {
-        initUIComponent(search.val(), 0, limitRecord.val(), true);
+        initUIComponent(searchValue, 0, limitRecord.val(), true);
     });
 
     // Press enter to search
     search.keydown((e) => {
-       if (e.key === "Enter") {
-           e.preventDefault();
-           initUIComponent(search.val(), 0, limitRecord.val(), true);
-       }
+        if (e.key === "Enter") {
+            e.preventDefault();
+            searchValue = search.val();
+            initUIComponent(searchValue, 0, limitRecord.val(), true);
+        }
     });
 
     // Call API Update user by userId
@@ -157,7 +159,26 @@
 
     // Call API Delete user by userId
     function deleteUser(id) {
-        console.log(id);
+        MyAjax.delete(`/api/users/${id}`, null, () => {
+            // Show notify delete success
+            $.toast({
+                text: 'Delete user ' + id + ' success!',
+                showHideTransition: 'fade',
+                position: 'bottom-right',
+                icon: 'success'
+            });
+
+            // Reload table
+            initUIComponent(searchValue, myPagination.pagination('getCurrentPage') - 1, limitRecord.val(), true);
+        }, () => {
+            // Show delete error!
+            $.toast({
+                text: 'Delete user ' + id + ' error!',
+                showHideTransition: 'fade',
+                position: 'bottom-right',
+                icon: 'error'
+            });
+        });
     }
 </script>
 </body>
