@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
@@ -59,8 +60,8 @@ public class UserService {
 
     /**
      * @param search Search value in client
-     * @param page page query in client
-     * @param size max records/page
+     * @param page   page query in client
+     * @param size   max records/page
      * @return {@link FindUserResponse}
      */
     public FindUserResponse getUser(String search, int page, int size) {
@@ -72,10 +73,40 @@ public class UserService {
 
     /**
      * Delete user by User id
+     *
      * @param userId userId
      */
     @Transactional
     public void deleteUser(@NotNull Long userId) {
         userRepository.deleteById(userId);
+    }
+
+    /**
+     * @param user User request body
+     * @return {@link User}
+     */
+    public User createUser(User user) {
+        return userRepository.save(user);
+    }
+
+    /**
+     * @param user {@link User}
+     * @return firstName and LastName is not empty
+     */
+    public static boolean validateEmptyRequest(User user) {
+        return StringUtils.hasText(user.getFirstName())
+                && StringUtils.hasText(user.getLastName());
+    }
+
+    /**
+     * @param user User request body
+     * @return {@link User}
+     */
+    public User updateUser(User user) {
+        if (user == null || user.getId() == null
+                || !userRepository.existsById(user.getId())) {
+            throw new NullPointerException();
+        }
+        return userRepository.save(user);
     }
 }

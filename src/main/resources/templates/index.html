@@ -25,7 +25,9 @@
     <a class="navbar-brand" href="#">
         <img alt="" height="30" src="https://getbootstrap.com/docs/4.6/assets/brand/bootstrap-solid.svg" width="30">
     </a>
-    <button class="btn btn-outline-success" type="button"><i class="fas fa-plus"></i> Add User</button>
+    <button class="btn btn-outline-success" id="btn-add-user"
+            type="button"><i class="fas fa-plus"></i> Add User
+    </button>
 </nav>
 <div class="ml-5 mr-5">
     <div class="d-flex mt-2 mb-2 justify-content-between">
@@ -63,38 +65,162 @@
     <div class="d-flex justify-content-end">
         <div id="my-pagination"></div>
     </div>
+
+    <!--    Modal add user-->
+    <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade"
+         data-backdrop="static" id="modal-add-user" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add User!</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <section>
+                        <div class="form-group">
+                            <label for="add-fullName">Full Name</label>
+                            <input class="form-control" id="add-fullName"
+                                   placeholder="Ex: Ignacio Ward" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="add-lastName">Last Name</label>
+                            <input class="form-control" id="add-lastName"
+                                   placeholder="Ex: Shawnee" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="add-firstName">First Name</label>
+                            <input class="form-control" id="add-firstName"
+                                   placeholder="Ex: Ullrich" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="add-address">Address</label>
+                            <input class="form-control" id="add-address"
+                                   placeholder="Ex: 3198 Konopelski Drives, Manchester, IA 52908" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="add-phoneNumber">Phone Number</label>
+                            <input class="form-control" id="add-phoneNumber"
+                                   placeholder="Ex: 327.473.6862" type="text">
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer text-center">
+                    <button class="btn btn-outline-primary" id="submit-add-form" type="button">
+                        <i class="far fa-paper-plane"></i> Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--    Modal edit user-->
+    <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade"
+         data-backdrop="static" id="modal-edit-user" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit User!</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <section>
+                        <div class="form-group">
+                            <label for="edit-user-id">User Id</label>
+                            <input class="form-control" id="edit-user-id" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-fullName">Full Name</label>
+                            <input class="form-control" id="edit-fullName"
+                                   placeholder="Ex: Ignacio Ward" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-lastName">Last Name</label>
+                            <input class="form-control" id="edit-lastName"
+                                   placeholder="Ex: Shawnee" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-firstName">First Name</label>
+                            <input class="form-control" id="edit-firstName"
+                                   placeholder="Ex: Ullrich" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-address">Address</label>
+                            <input class="form-control" id="edit-address"
+                                   placeholder="Ex: 3198 Konopelski Drives, Manchester, IA 52908" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-phoneNumber">Phone Number</label>
+                            <input class="form-control" id="edit-phoneNumber"
+                                   placeholder="Ex: 327.473.6862" type="text">
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer text-center">
+                    <button class="btn btn-outline-primary" id="submit-edit-form" type="button">
+                        <i class="far fa-paper-plane"></i> Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
 <script crossorigin="anonymous"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-        src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g=="
+        referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 <script crossorigin="anonymous"
         integrity="sha512-Y+cHVeYzi7pamIOGBwYHrynWWTKImI9G78i53+azDb1uPmU1Dz9/r2BLxGXWgOC7FhwAGsy3/9YpNYaoBy7Kzg=="
         referrerpolicy="no-referrer"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.js"></script>
 <script crossorigin="anonymous"
-        integrity="sha512-Y+cHVeYzi7pamIOGBwYHrynWWTKImI9G78i53+azDb1uPmU1Dz9/r2BLxGXWgOC7FhwAGsy3/9YpNYaoBy7Kzg=="
+        integrity="sha512-0agUJrbt+sO/RcBuV4fyg3MGYU4ajwq2UJNEx6bX8LJW6/keJfuX+LVarFKfWSMx0m77ZyA0NtDAkHfFMcnPpQ=="
         referrerpolicy="no-referrer"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.js"></script>
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.js"></script>
 <script th:src="@{js/common.js}"></script>
 <script th:src="@{js/jquery.simplePagination.js}"></script>
 <!-- Viet java script -->
 <script>
 
+    // Variable of list user table
     const myPagination = $("#my-pagination");
     const limitRecord = $("#select-record");
     const search = $("#input-search");
+    //======================================
+
+    // Variable of modal Add user
+    const modalAddUser = $("#modal-add-user");
+    const inAddFullName = $("#add-fullName");
+    const inAddLastName = $("#add-lastName");
+    const inAddFirstName = $("#add-firstName");
+    const inAddAddress = $("#add-address");
+    const inAddPhoneNo = $("#add-phoneNumber");
+    const btnSubmitAddForm = $("#submit-add-form");
+    //======================================
+
+    // Variable of modal Edit user
+    const modalEditUser = $("#modal-edit-user");
+    const inEditUserId = $("#edit-user-id");
+    const inEditFullName = $("#edit-fullName");
+    const inEditLastName = $("#edit-lastName");
+    const inEditFirstName = $("#edit-firstName");
+    const inEditAddress = $("#edit-address");
+    const inEditPhoneNo = $("#edit-phoneNumber");
+    const btnSubmitEditForm = $("#submit-edit-form");
+    //======================================
+
+    // Variable for query data
     let searchValue = "";
+    //======================================
+
+
+    //======================================
+    // Coding logic in page
+    //======================================
 
     $(document).ready(function () {
         initUIComponent(search.val(), 0, limitRecord.val(), true);
@@ -154,6 +280,9 @@
 
     // Call API Update user by userId
     function updateUser(id) {
+        // render data
+        modalTitle.text("Add User!");
+        modalUser.show();
         console.log(id);
     }
 
@@ -180,6 +309,52 @@
             });
         });
     }
+
+    // Add User
+    $("#btn-add-user").on("click", () => {
+        modalAddUser.modal("show");
+    });
+
+    // Close modal add user
+    modalAddUser.on("hidden.bs.modal", () => {
+        // Clear all input
+        inAddFullName.val("");
+        inAddLastName.val("");
+        inAddFirstName.val("");
+        inAddAddress.val("");
+        inAddPhoneNo.val("");
+    });
+
+    // Insert new User
+    btnSubmitAddForm.on("click", () => {
+        let user = {
+            fullName: inAddFullName.val(),
+            lastName: inAddLastName.val(),
+            firstName: inAddFirstName.val(),
+            address: inAddAddress.val(),
+            phoneNumber: inAddPhoneNo.val()
+        };
+        MyAjax.post(`/api/users`, JSON.stringify(user), (response) => {
+            modalAddUser.modal("hide");
+            // Show notify create success
+            $.toast({
+                text: 'Create user success with id: ' + response.id,
+                showHideTransition: 'fade',
+                position: 'bottom-right',
+                icon: 'success'
+            });
+            // Reload table
+            initUIComponent(searchValue, myPagination.pagination('getCurrentPage') - 1, limitRecord.val(), true);
+        }, () => {
+            // Show delete error!
+            $.toast({
+                text: 'Create error, please try again!',
+                showHideTransition: 'fade',
+                position: 'bottom-right',
+                icon: 'error'
+            });
+        });
+    });
 </script>
 </body>
 </html>

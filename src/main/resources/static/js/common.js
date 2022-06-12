@@ -16,6 +16,8 @@ const MyAjax = function() {
         $.ajax({
             type: "POST",
             url: url,
+            datatype : "json",
+            contentType: "application/json; charset=utf-8",
             data: data,
             success: (response) => {
                 doSuccess && doSuccess(response);
@@ -30,6 +32,8 @@ const MyAjax = function() {
         $.ajax({
             type: "PUT",
             url: url,
+            datatype : "json",
+            contentType: "application/json; charset=utf-8",
             data: data,
             success: (response) => {
                 doSuccess && doSuccess(response);
